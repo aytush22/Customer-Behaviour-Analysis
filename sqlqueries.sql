@@ -44,22 +44,22 @@ LIMIT 5;
 
 --Q7. Segment customers into New, Returning, and Loyal based on their total number of previous purchases, and show the count of each segment.
 
--- WITH customer_type AS
--- (
--- SELECT customer_id ,
--- CASE WHEN previous_purchases = 1 THEN 'New'
--- 	 WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning'
--- 	 ELSE 'Loyal'
--- END AS customer_segment
--- FROM customer
--- )
+WITH customer_type AS
+ (
+ SELECT customer_id ,
+ CASE WHEN previous_purchases = 1 THEN 'New'
+	WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning'
+	 ELSE 'Loyal'
+END AS customer_segment
+ FROM customer
+ )
 
--- SELECT customer_segment,COUNT(customer_id) as total_customers
--- FROM customer_type
--- GROUP BY customer_segment
--- ORDER BY total_customers DESC;
+ SELECT customer_segment,COUNT(customer_id) as total_customers
+ FROM customer_type
+ GROUP BY customer_segment
+ ORDER BY total_customers DESC;
 
--- --Q8. What are the top 3 most purchased products within each category?
+ --Q8. What are the top 3 most purchased products within each category?
 
 -- WITH item_count AS(
 -- SELECT category,
